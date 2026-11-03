@@ -1,5 +1,5 @@
 const SERVER_URL = 'https://health.jujacloud.tech/ping'
-const PING_TIMEOUT_MS = 10000
+const PING_TIMEOUT_MS = 20000
 
 interface Env {
     ALERT_EMAIL: SendEmail
@@ -17,7 +17,7 @@ const errorMessage = (error: unknown): string =>
 const checkWithRetry = async (): Promise<HealthResult> => {
     const first = await checkHealth()
     if (first.healthy) return first
-    await scheduler.wait(5000)
+    await scheduler.wait(10000)
     return checkHealth()
 }
 
